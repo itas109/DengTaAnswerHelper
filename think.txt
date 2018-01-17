@@ -25,3 +25,6 @@ $.ajax({
            datd=data;
           }
         });
+
+get answer
+for(var i=0; i<20;i++){console.log(i+1+ " : "+$('[name="ra_'+i+'"]').attr('goright'))}
