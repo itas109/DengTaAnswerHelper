@@ -34,7 +34,7 @@ def get_file_answer(answer_file_path):
 
 def pull_screenshot():
     os.system('adb shell screencap -p /sdcard/1.jpg')
-    os.system('adb pull /sdcard/1.jpg D:/PythonWorkspace/img')
+    os.system('adb pull /sdcard/1.jpg ' + os.getcwd()+ "/img")
 
 if __name__ == "__main__":
     # 1.载入答案
@@ -49,8 +49,9 @@ if __name__ == "__main__":
     anser_content = anser_content.replace('(', '')
     anser_content = anser_content.replace(')', '')
     anser_content = anser_content.replace('，', '')
-    anser_content = anser_content.replace('“', '')
-    anser_content = anser_content.replace('”', '')
+    anser_content = anser_content.replace('“', '')#中文引号左
+    anser_content = anser_content.replace('”', '')#中文引号右
+    anser_content = anser_content.replace('"', '')#英文引号
     anser_content = anser_content.replace('[', '')
     anser_content = anser_content.replace(']', '')
     anser_content = anser_content.replace(',', '')
@@ -93,7 +94,13 @@ if __name__ == "__main__":
             index_tile = str(i).find("选题")
         count = count + 1
 
-        if (re.search('[ABCD][^\d]',str(i))):#正则匹配答案
+        #匹配模板
+        if(len(i) == 1):
+            pattern = '[ABCD]'
+        else:
+            pattern = '[ABCD][^\d]'
+
+        if (re.search(pattern,str(i))):#正则匹配答案
             answer_lists.append(i)#载入答案
 
             if (i[0] == "A"):
@@ -127,6 +134,7 @@ if __name__ == "__main__":
     keylist = keylist.replace('。', '')
     keylist = keylist.replace('“', '')
     keylist = keylist.replace('”', '')
+    keylist = keylist.replace('"', '')
     keylist = keylist.replace('[', '')
     keylist = keylist.replace(']', '')
     keylist = keylist.replace('\n', '')
@@ -140,48 +148,51 @@ if __name__ == "__main__":
     print("搜索关键字 : ",keylist)
 
     if(keylist == ""):
-        print("OCR Error")
+        print("OCR错误 ： 关键词为空")
     else:
         # 通过关键字搜索题库
         index = anser_content.find(keylist)
 
-        answer_index = anser_content.find("参考答案:", index)
+        if(index < 0):
+            print("OOCR错误 ： 未找到答案")
+        else:
+            answer_index = anser_content.find("参考答案:", index)
 
-        answer_end_index = re.search('\d', anser_content[answer_index:]).start()
+            answer_end_index = re.search('\d', anser_content[answer_index:]).start()
 
-        #打印题目及答案
-        tile_answer_index = anser_content.find(keylist)
-        tile_answer = anser_content[tile_answer_index: answer_index + answer_end_index]
-        print(tile_answer)
+            #打印题目及答案
+            tile_answer_index = anser_content.find(keylist)
+            tile_answer = anser_content[tile_answer_index: answer_index + answer_end_index]
+            print(tile_answer)
 
-        # 找到答案
-        anser_list_flags = []
-        answer_list = anser_content[answer_index + 5: answer_index + answer_end_index]
-        for letter in answer_list:
-            anser_list_flags.append(letter)
+            # 找到答案
+            anser_list_flags = []
+            answer_list = anser_content[answer_index + 5: answer_index + answer_end_index]
+            for letter in answer_list:
+                anser_list_flags.append(letter)
 
-        print("\n答案：")
+            print("\n答案：")
 
-        for anser_list_flag in anser_list_flags:
-            # print("anser_list_flag",anser_list_flag)
-            for answer_list in answer_lists:
-                # print("answer_list", answer_list)
-                if(str(answer_list).find(anser_list_flag) >= 0 ):
-                    index_1 = tile_answer.find(anser_list_flag)
-                    if(anser_list_flag != "D"):
-                        index_2 = index_1 + 1 +re.search("[ABCD]",tile_answer[index_1 + 1 :]).start()
-                    else:
-                        index_2 = index_1 + 1 + re.search("[参考答案]", tile_answer[index_1 + 1:]).start()
-                    # print(index_1)
-                    # print(index_2)
-                    print(tile_answer[index_1:index_2])
+            for anser_list_flag in anser_list_flags:
+                # print("anser_list_flag",anser_list_flag)
+                for answer_list in answer_lists:
+                    # print("answer_list", answer_list)
+                    if(str(answer_list).find(anser_list_flag) >= 0 ):
+                        index_1 = tile_answer.find(anser_list_flag)
+                        if(anser_list_flag != "D"):
+                            index_2 = index_1 + 1 +re.search("[ABCD]",tile_answer[index_1 + 1 :]).start()
+                        else:
+                            index_2 = index_1 + 1 + re.search("[参考答案]", tile_answer[index_1 + 1:]).start()
+                        # print(index_1)
+                        # print(index_2)
+                        print(tile_answer[index_1:index_2])
 
-        # 回填答案
+            # 回填答案
 
-        # 计数
+            # 计数
 
-        # 到达20？
+            # 到达20？
 
-        # 提示交卷
+            # 提示交卷
 
-        # 自动交卷
+            # 自动交卷
