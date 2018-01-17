@@ -1,21 +1,22 @@
+1.
 http://xxjs.dtdjzx.gov.cn/
 
-js
+2.js
 
 http://xxjs.dtdjzx.gov.cn/js/moNiDaTi/monidati.js?v=17121002
 
 
-all title
+3.all title
 $('.w_charu').text()
 
-tile and answer
+4.tile and answer
 http://xxjs.dtdjzx.gov.cn/zaixianxuexi.html
 $('.luis').text()
 
-tiku select
+5.tiku select
 http://xxjs.dtdjzx.gov.cn/tiku.html
 
-get tiku
+6.get tiku
 $.ajax({
           async:false ,
           type: "get",
@@ -26,11 +27,11 @@ $.ajax({
           }
         });
 
-get answer
+7.get answer
 for(var i=0; i<20;i++){console.log(i+1+ " : "+$('[name="ra_'+i+'"]').attr('goright'))}
 
 
-global param 
+8.global param 
 localStorage
 
 Storage {Hm_lvt_5f49e5b7e1e8d532338e22e483af5d8e: "1547702834714|1516160655,1516162359,1516162407,1516162721", anniujia: "1", c_id: "6dninu6vh2i50qvn0kce117qdr", c_listid: "rannn6pk0mg2rqj5irgt8l2eom", fenfen: "15"…}
@@ -82,3 +83,15 @@ w_subjectType
 __proto__
 :
 Object
+
+9.set check
+$("input[type='radio'][name=ra_0][value=A]").attr("checked", "checked");
+
+10.set next tile
+$(".w_btn_tab_down").click()
+
+11.当期题目
+$('.W_ti_ul')
+
+12.活跃下一题按钮
+if(w_nowNum!=w_total){$('.w_btn_tab_down').removeClass('W_bgcol');}
