@@ -7,3 +7,10 @@ http://xxjs.dtdjzx.gov.cn/js/moNiDaTi/monidati.js?v=17121002
 
 all title
 $('.w_charu').text()
+
+tile and answer
+http://xxjs.dtdjzx.gov.cn/zaixianxuexi.html
+$('.luis').text()
+
+tiku select
+http://xxjs.dtdjzx.gov.cn/tiku.html
