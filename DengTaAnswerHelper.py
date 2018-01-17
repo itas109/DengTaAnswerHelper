@@ -48,6 +48,8 @@ if __name__ == "__main__":
     anser_content = anser_content.replace('、', '')  # 去除空格
     anser_content = anser_content.replace('(', '')
     anser_content = anser_content.replace(')', '')
+    anser_content = anser_content.replace('（', '')
+    anser_content = anser_content.replace('）', '')
     anser_content = anser_content.replace('，', '')
     anser_content = anser_content.replace('“', '')#中文引号左
     anser_content = anser_content.replace('”', '')#中文引号右
@@ -96,11 +98,30 @@ if __name__ == "__main__":
 
         #匹配模板
         if(len(i) == 1):
-            pattern = '[ABCD]'
+            pattern = '[ABCDabcd]'
         else:
-            pattern = '[ABCD][^\d]'
+            pattern = '[ABCDabcd][^\d]'
 
         if (re.search(pattern,str(i))):#正则匹配答案
+            # 过滤标点符号
+            i = i.replace('(', '')
+            i = i.replace(')', '')
+            i = i.replace('（', '')
+            i = i.replace('）', '')
+            i = i.replace('，', '')
+            i = i.replace(',', '')
+            i = i.replace('。', '')
+            i = i.replace('“', '')
+            i = i.replace('”', '')
+            i = i.replace('"', '')
+            i = i.replace('[', '')
+            i = i.replace(']', '')
+            i = i.replace('\n', '')
+            i = i.replace(' ', '')
+            i = i.replace('、', '')
+            i = i.replace('?', '')
+            i = i.replace('？', '')
+
             answer_lists.append(i)#载入答案
 
             if (i[0] == "A"):
@@ -124,12 +145,12 @@ if __name__ == "__main__":
         if( index_tile2 >= 0):
             keylist = keylist[index_tile2 + 2:]
 
-    #过滤标点符号
+    # 过滤标点符号
     keylist = keylist.replace('(', '')
     keylist = keylist.replace(')', '')
     keylist = keylist.replace('（', '')
     keylist = keylist.replace('）', '')
-    keylist = keylist.replace( '，','')
+    keylist = keylist.replace('，', '')
     keylist = keylist.replace(',', '')
     keylist = keylist.replace('。', '')
     keylist = keylist.replace('“', '')
@@ -173,19 +194,34 @@ if __name__ == "__main__":
 
             print("\n答案：")
 
-            for anser_list_flag in anser_list_flags:
-                # print("anser_list_flag",anser_list_flag)
-                for answer_list in answer_lists:
-                    # print("answer_list", answer_list)
+            for anser_list_flag in anser_list_flags:#找到的答案
+                for answer_list in answer_lists:#识别的答案
                     if(str(answer_list).find(anser_list_flag) >= 0 ):
                         index_1 = tile_answer.find(anser_list_flag)
                         if(anser_list_flag != "D"):
-                            index_2 = index_1 + 1 +re.search("[ABCD]",tile_answer[index_1 + 1 :]).start()
+                            index_2 = index_1 + 1 +re.search("[ABCDabcd]",tile_answer[index_1 + 1 :]).start()
                         else:
                             index_2 = index_1 + 1 + re.search("[参考答案]", tile_answer[index_1 + 1:]).start()
-                        # print(index_1)
-                        # print(index_2)
-                        print(tile_answer[index_1:index_2])
+                        answer = tile_answer[index_1:index_2]
+                        print(answer)
+                        for i,answer_list_pattern in enumerate(answer_lists):
+                            # print("+++",answer_list_pattern)
+                            if(len(answer_list_pattern) > 1):
+                                index_answer_content = answer.find(answer_list_pattern[1:],1);#如果答案B答案包括A答案会异常
+                                # print(index_answer_content)
+                                if(index_answer_content >= 0):
+                                    print("真实答案索引(1开始) ：",i+1,answer_list_pattern)
+                                    break
+                                else:
+                                    if(i == 3):
+                                        print("OCR识别可能异常 : 真实答案未找到")
+                            else:
+                                print("OCR识别可能异常：", answer_list_pattern)
+
+
+
+
+
 
             # 回填答案
 
