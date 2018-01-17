@@ -14,3 +14,14 @@ $('.luis').text()
 
 tiku select
 http://xxjs.dtdjzx.gov.cn/tiku.html
+
+get tiku
+$.ajax({
+          async:false ,
+          type: "get",
+          url:localStorage.getItem('oUrls')+"chapter_info/list",
+          dataType: "json",
+          success: function(data) {
+           datd=data;
+          }
+        });
