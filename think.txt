@@ -95,3 +95,20 @@ $('.W_ti_ul')
 
 12.活跃下一题按钮
 if(w_nowNum!=w_total){$('.w_btn_tab_down').removeClass('W_bgcol');}
+
+13.auto answer
+var answer_array= new Array(); //定义一数组
+var answer_count = 0; //答案个数
+for(var i=0; i<20;i++){
+var answer_list = $('[name="ra_'+i+'"]').attr('goright');
+//console.log(answer_list)
+answer_array = answer_list.split(",")
+//console.log(answer_array)
+answer_count = answer_array.length
+//console.log('%d',answer_count)
+for (j=0;j<answer_count ;j++ )
+{
+	//console.log(answer_array[j]);
+	$('[name="ra_'+i+'"][value="'+answer_array[j]+'"]').click();
+}
+}
