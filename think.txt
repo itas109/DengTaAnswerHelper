@@ -90,13 +90,16 @@ $("input[type='radio'][name=ra_0][value=A]").attr("checked", "checked");
 10.set next tile
 $(".w_btn_tab_down").click()
 
-11.当期题目
+11.current tiles
 $('.W_ti_ul')
 
-12.活跃下一题按钮
+12.active next
 if(w_nowNum!=w_total){$('.w_btn_tab_down').removeClass('W_bgcol');}
 
-13.auto answer
+13.auto select
+$('[name="ra_'+j+'"][value="'+answer_array[j]+'"]').attr("checked", "checked");
+
+14.auto answer
 var answer_array= new Array(); //定义一数组
 var answer_count = 0; //答案个数
 for(var i=0; i<20;i++){
