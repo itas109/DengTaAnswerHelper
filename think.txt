@@ -28,3 +28,57 @@ $.ajax({
 
 get answer
 for(var i=0; i<20;i++){console.log(i+1+ " : "+$('[name="ra_'+i+'"]').attr('goright'))}
+
+
+global param 
+localStorage
+
+Storage {Hm_lvt_5f49e5b7e1e8d532338e22e483af5d8e: "1547702834714|1516160655,1516162359,1516162407,1516162721", anniujia: "1", c_id: "6dninu6vh2i50qvn0kce117qdr", c_listid: "rannn6pk0mg2rqj5irgt8l2eom", fenfen: "15"¡­}
+Hm_lvt_5f49e5b7e1e8d532338e22e483af5d8e
+:
+"1547702834714|1516160655,1516162359,1516162407,1516162721"
+anniujia
+:
+"1"
+c_id
+:
+"6dninu6vh2i50qvn0kce117qdr"
+c_listid
+:
+"rannn6pk0mg2rqj5irgt8l2eom"
+fenfen
+:
+"15"
+fenxiangurl
+:
+"http://xxjs.dtdjzx.gov.cn"
+length
+:
+14
+oUrls
+:
+"http://xxjs.dtdjzx.gov.cn/quiz-api/"
+w_allHuiKan
+:
+"[{"id":"undefined","answer":"A","right":"B","subjectType":0},{"id":"undefined","answer":"B","right":"A","subjectType":0},{"id":"undefined","answer":"C","right":"A","subjectType":0},{"id":"undefined","answer":"D","right":"A,B,C,D","subjectType":1},{"id":"undefined","answer":"D","right":"A,B,D","subjectType":1},{"id":"undefined","answer":"C","right":"D","subjectType":0},{"id":"undefined","answer":"D","right":"A,D","subjectType":1},{"id":"undefined","answer":"D","right":"C","subjectType":0},{"id":"undefined","answer":"D","right":"A,B,D","subjectType":1},{"id":"undefined","answer":"D","right":"A","subjectType":0},{"id":"undefined","answer":"D","right":"D","subjectType":0},{"id":"undefined","answer":"C","right":"A,B,C,D","subjectType":1},{"id":"undefined","answer":"C","right":"B","subjectType":0},{"id":"undefined","answer":"C","right":"B","subjectType":0},{"id":"undefined","answer":"C","right":"B,C,D","subjectType":1},{"id":"undefined","answer":"C","right":"B","subjectType":0},{"id":"undefined","answer":"C","right":"C","subjectType":0},{"id":"undefined","answer":"C","right":"C","subjectType":0},{"id":"undefined","answer":"C","right":"A,C","subjectType":1},{"id":"undefined","answer":"B","right":"A","subjectType":0}]"
+w_answer
+:
+"A,C"
+w_changeid
+:
+"0"
+w_cuoti
+:
+"[0,1,2,3,4,5,6,7,8,9,11,12,13,14,15,18,19]"
+w_nowNum
+:
+"18"
+w_shijain
+:
+"3·Ö29Ãë"
+w_subjectType
+:
+"0"
+__proto__
+:
+Object
