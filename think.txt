@@ -1,0 +1,9 @@
+http://xxjs.dtdjzx.gov.cn/
+
+js
+
+http://xxjs.dtdjzx.gov.cn/js/moNiDaTi/monidati.js?v=17121002
+
+
+all title
+$('.w_charu').text()
