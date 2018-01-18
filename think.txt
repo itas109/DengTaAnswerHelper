@@ -115,3 +115,32 @@ for (j=0;j<answer_count ;j++ )
 	$('[name="ra_'+i+'"][value="'+answer_array[j]+'"]').click();
 }
 }
+
+15.auto answer 2
+var answer_array= new Array(); //定义一数组
+var answer_count = 0; //答案个数
+//获取答案
+$.ajax({
+          async:false ,
+          type: "post",
+          url:oUrls+'game_info/lookBackSubject',
+          data:{roundOnlyId:roundOnlyId},
+          dataType: "json",
+	
+          success: function(data) {
+		  
+			for(var i=0; i<20;i++){
+				var answer_list = data.data.dateList[i].answer;
+				console.log(answer_list)
+				answer_array = answer_list.split(",")
+				//console.log(answer_array)
+				answer_count = answer_array.length
+				//console.log('%d',answer_count)
+				for (j=0;j<answer_count ;j++ )
+				{
+					//console.log(answer_array[j]);
+					$('[name="ra_'+i+'"][value="'+answer_array[j]+'"]').click();
+				}
+			}
+          }
+        });
