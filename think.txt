@@ -144,3 +144,24 @@ $.ajax({
 			}
           }
         });
+
+16.start answer
+$('[id="lbuts"]').click()
+
+17.select id
+document.getElementById("shenfen")[1].selected=true;
+
+18.login page
+$('[id="bts"]').click()
+
+19.set user
+document.getElementById("username").value = '12345678901'
+
+20.set password
+document.getElementById("password").value = '123456'
+
+21.set validateCode
+document.getElementById("validateCode").value = '1234'
+
+21.login
+$('.js-submit').click()
