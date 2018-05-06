@@ -168,12 +168,15 @@ $('.js-submit').click()
 
 22.auto watch video
 $.postJSON("/bintang/learntime", 
+
 {
-				
+
 timelength:project.courseDuration,
-				
+
 courseId:project.courseId,
-				
+
 userId:userId,
-				
-studyTimes:600});
+
+studyTimes:project.courseDuration * 60
+
+});
