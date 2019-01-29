@@ -180,3 +180,13 @@ userId:userId,
 studyTimes:project.courseDuration * 60
 
 });
+
+22.auto answer3 2019
+http://www.dtdjzx.gov.cn/
+$.postJSON("/bintang/learntime", 
+{
+timelength:project.courseDuration,
+courseId:project.courseId,
+userId:userId,
+studyTimes:project.courseDuration * 60
+});
