@@ -34,7 +34,7 @@ for(var i=0; i<20;i++){console.log(i+1+ " : "+$('[name="ra_'+i+'"]').attr('gorig
 8.global param 
 localStorage
 
-Storage {Hm_lvt_5f49e5b7e1e8d532338e22e483af5d8e: "1547702834714|1516160655,1516162359,1516162407,1516162721", anniujia: "1", c_id: "6dninu6vh2i50qvn0kce117qdr", c_listid: "rannn6pk0mg2rqj5irgt8l2eom", fenfen: "15"¡­}
+Storage {Hm_lvt_5f49e5b7e1e8d532338e22e483af5d8e: "1547702834714|1516160655,1516162359,1516162407,1516162721", anniujia: "1", c_id: "6dninu6vh2i50qvn0kce117qdr", c_listid: "rannn6pk0mg2rqj5irgt8l2eom", fenfen: "15"â€¦}
 Hm_lvt_5f49e5b7e1e8d532338e22e483af5d8e
 :
 "1547702834714|1516160655,1516162359,1516162407,1516162721"
@@ -76,7 +76,7 @@ w_nowNum
 "18"
 w_shijain
 :
-"3·Ö29Ãë"
+"3åˆ†29ç§’"
 w_subjectType
 :
 "0"
@@ -100,8 +100,8 @@ if(w_nowNum!=w_total){$('.w_btn_tab_down').removeClass('W_bgcol');}
 $('[name="ra_'+j+'"][value="'+answer_array[j]+'"]').attr("checked", "checked");
 
 14.auto answer
-var answer_array= new Array(); //¶¨ÒåÒ»Êý×é
-var answer_count = 0; //´ð°¸¸öÊý
+var answer_array= new Array(); //å®šä¹‰ä¸€æ•°ç»„
+var answer_count = 0; //ç­”æ¡ˆä¸ªæ•°
 for(var i=0; i<20;i++){
 var answer_list = $('[name="ra_'+i+'"]').attr('goright');
 //console.log(answer_list)
@@ -117,9 +117,9 @@ for (j=0;j<answer_count ;j++ )
 }
 
 15.auto answer 2
-var answer_array= new Array(); //¶¨ÒåÒ»Êý×é
-var answer_count = 0; //´ð°¸¸öÊý
-//»ñÈ¡´ð°¸
+var answer_array= new Array(); //å®šä¹‰ä¸€æ•°ç»„
+var answer_count = 0; //ç­”æ¡ˆä¸ªæ•°
+//èŽ·å–ç­”æ¡ˆ
 $.ajax({
           async:false ,
           type: "post",
@@ -190,3 +190,54 @@ courseId:project.courseId,
 userId:userId,
 studyTimes:project.courseDuration * 60
 });
+
+23.auto watch video 2019-06-18
+getStudyTimes = Math.ceil(project.courseDuration * 60);
+
+var receive = {
+    timelength:project.courseDuration,
+    courseId:project.courseId,
+    userId:userId,
+    studyTimes:getStudyTimes
+}
+var requestParam = {
+        courseId:project.courseId,
+        userId:userId,
+        studyTimes:getStudyTimes
+        }
+        var appKey = userId;
+var timestamp = new Date().getTime();
+var nonce = guid();
+var signatureType = 'MD5';
+var authType = 'ACCESSKEY';
+var signatureVersion = '1';
+var requestUri = '/bintang/recordProgress';
+var signature = sign(appKey, appSecret, requestUri, timestamp, nonce, requestParam);
+var signatureEntity = {
+    'appKey' : appKey,
+    'timestamp' : timestamp,
+    'nonce' : nonce,
+    'signatureType' : signatureType,
+    'authType' : authType,
+    'signatureVersion' : signatureVersion,
+    'requestUri' : requestUri,
+    'signature' : signature
+};
+$.postJSON("/bintang/recordProgress", {
+               'signatureEntity' : signatureEntity,
+               'receive' : receive
+           })
+.then(function(data) {
+          if(data.msg=='1') {
+              player.pause();
+              $('#modal3').modal();
+              $('#modal3').on('hidden.bs.modal', function (e) {
+                  _close();
+              })
+          }
+          if(data.success==false){
+              returnTime = true;
+          }
+          project.studyTimes = getStudyTimes;
+          console.log("learntime:"+project.studyTimes);
+      });
