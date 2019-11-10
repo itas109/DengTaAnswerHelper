@@ -1,4 +1,4 @@
-1.
+﻿1.
 http://xxjs.dtdjzx.gov.cn/
 
 2.js
@@ -240,4 +240,48 @@ $.postJSON("/bintang/recordProgress", {
           }
           project.studyTimes = getStudyTimes;
           console.log("learntime:"+project.studyTimes);
+      });
+
+23.auto watch video 2019-11-10
+
+notice: updateTimeEnd - startTime must greater than getStudyTimes
+if not,return {code: true, isRecord: false}
+
+getStudyTimes = Math.ceil(project.courseDuration * 60);
+
+var receive = {
+    timelength:project.courseDuration,
+    courseId:project.courseId,
+    userId:userId,
+    studyTimes:getStudyTimes
+}
+var requestParam = {
+        courseId:project.courseId,
+        userId:userId,
+        studyTimes:getStudyTimes
+        }
+        var appKey = userId;
+var timestamp = new Date().getTime();
+var nonce = guid();
+var signatureType = 'MD5';
+var authType = 'ACCESSKEY';
+var signatureVersion = '1';
+var requestUri = '/bintang/recordProgress';
+var signature = sign(appKey, appSecret, requestUri, timestamp, nonce, requestParam);
+var signatureEntity = {
+    'appKey' : appKey,
+    'timestamp' : timestamp,
+    'nonce' : nonce,
+    'signatureType' : signatureType,
+    'authType' : authType,
+    'signatureVersion' : signatureVersion,
+    'requestUri' : requestUri,
+    'signature' : signature
+};
+$.postJSON("/bintang/updateTimeEnd", {
+               'signatureEntity' : signatureEntity,
+               'receive' : receive
+           })
+.then(function(data) {
+		console.log(data)
       });
